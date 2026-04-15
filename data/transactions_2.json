@@ -1,0 +1,27 @@
+{
+  "transactions": [
+    {
+      "id": "tx006",
+      "amount": 4500.75,
+      "category": "food",
+      "date": "2024-01-21",
+      "currency": "RUB",
+      "description": "Ресторан"
+    },
+    {
+      "id": "tx007",
+      "amount": 800.00,
+      "category": "transport",
+      "date": "2024-01-22",
+      "currency": "RUB",
+      "description": "Такси"
+    },
+    {
+      "id": "tx008",
+      "amount": -100.00,
+      "category": "other",
+      "date": "2024-01-23",
+      "currency": "RUB"
+    }
+  ]
+}

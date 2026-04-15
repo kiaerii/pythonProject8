@@ -1,0 +1,73 @@
+{
+  "summary": {
+    "total_transactions": 6,
+    "total_categories": 5,
+    "categories": {
+      "food": 6001.25,
+      "utilities": 3200.0,
+      "entertainment": 1200.0,
+      "salary": 2500.0,
+      "transport": 800.0
+    }
+  },
+  "details": {
+    "food": [
+      {
+        "id": "tx001",
+        "amount": 1500.5,
+        "category": "food",
+        "date": "2024-01-15T00:00:00",
+        "currency": "RUB",
+        "description": "Покупка продуктов"
+      },
+      {
+        "id": "tx006",
+        "amount": 4500.75,
+        "category": "food",
+        "date": "2024-01-21T00:00:00",
+        "currency": "RUB",
+        "description": "Ресторан"
+      }
+    ],
+    "utilities": [
+      {
+        "id": "tx002",
+        "amount": 3200.0,
+        "category": "utilities",
+        "date": "2024-01-16T00:00:00",
+        "currency": "RUB",
+        "description": "Комунальные платежи"
+      }
+    ],
+    "entertainment": [
+      {
+        "id": "tx004",
+        "amount": 1200.0,
+        "category": "entertainment",
+        "date": "2024-01-18T00:00:00",
+        "currency": "USD",
+        "description": "Кино"
+      }
+    ],
+    "salary": [
+      {
+        "id": "tx005",
+        "amount": 2500.0,
+        "category": "salary",
+        "date": "2024-01-20T00:00:00",
+        "currency": "RUB",
+        "description": "Зарплата"
+      }
+    ],
+    "transport": [
+      {
+        "id": "tx007",
+        "amount": 800.0,
+        "category": "transport",
+        "date": "2024-01-22T00:00:00",
+        "currency": "RUB",
+        "description": "Такси"
+      }
+    ]
+  }
+}

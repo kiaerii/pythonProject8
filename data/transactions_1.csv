@@ -1,0 +1,6 @@
+id,amount,category,date,currency,description
+tx001,1500.50,food,2024-01-15,RUB,Покупка продуктов
+tx002,3200.00,utilities,2024-01-16,RUB,Комунальные платежи
+tx003,-500.00,transport,2024-01-17,RUB,Отрицательная сумма - ошибка
+tx004,1200.00,entertainment,2024-01-18,USD,Кино
+tx005,2500.00,salary,2024-01-20,RUB,Зарплата

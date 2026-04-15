@@ -1,0 +1,109 @@
+2026-03-27 14:08:11 - __main__ - INFO - Запуск Data Integration Engine
+2026-03-27 14:08:11 - __main__ - CRITICAL - Фатальная ошибка: Директория не существует: data
+2026-03-27 14:10:16 - __main__ - INFO - Запуск Data Integration Engine
+2026-03-27 14:10:16 - __main__ - INFO - Начинаем обработку 2 файлов в data
+2026-03-27 14:10:16 - __main__ - INFO - Обработка файла: transactions_1.csv
+2026-03-27 14:10:16 - __main__ - WARNING - Файл transactions_1.csv обработан с 1 ошибками. Успешных записей: 4
+2026-03-27 14:10:16 - __main__ - INFO - Обработка файла: transactions_2.json
+2026-03-27 14:10:16 - __main__ - WARNING - Файл transactions_2.json обработан с 1 ошибками. Успешных записей: 2
+2026-03-27 14:10:16 - app.services.aggregator - INFO - Данные успешно экспортированы в result.json
+2026-03-27 14:10:16 - __main__ - INFO - Обработка завершена. Успешно: 2, Ошибок: 0, Транзакций: 6
+2026-03-27 14:20:50 - __main__ - INFO - Запуск Data Integration Engine
+2026-03-27 14:20:50 - __main__ - INFO - Начинаем обработку 2 файлов в data
+2026-03-27 14:20:50 - __main__ - INFO - Обработка файла: transactions_1.csv
+2026-03-27 14:20:50 - __main__ - WARNING - Файл transactions_1.csv обработан с 1 ошибками. Успешных записей: 4
+2026-03-27 14:20:50 - __main__ - INFO - Обработка файла: transactions_2.json
+2026-03-27 14:20:50 - __main__ - WARNING - Файл transactions_2.json обработан с 1 ошибками. Успешных записей: 2
+2026-03-27 14:20:50 - app.services.aggregator - INFO - Данные успешно экспортированы в result.json
+2026-03-27 14:20:50 - __main__ - INFO - Обработка завершена. Успешно: 2, Ошибок: 0, Транзакций: 6
+2026-04-13 00:28:57 - __main__ - INFO - Запуск Data Integration Engine
+2026-04-13 00:28:57 - __main__ - INFO - Начинаем обработку 2 файлов в data
+2026-04-13 00:28:57 - __main__ - INFO - Обработка файла: transactions_1.csv
+2026-04-13 00:28:57 - __main__ - WARNING - Файл transactions_1.csv обработан с 1 ошибками. Успешных записей: 4
+2026-04-13 00:28:57 - __main__ - INFO - Обработка файла: transactions_2.json
+2026-04-13 00:28:57 - __main__ - WARNING - Файл transactions_2.json обработан с 1 ошибками. Успешных записей: 2
+2026-04-13 00:28:57 - app.services.aggregator - INFO - Данные успешно экспортированы в result.json
+2026-04-13 00:28:57 - __main__ - INFO - Обработка завершена. Успешно: 2, Ошибок: 0, Транзакций: 6
+2026-04-13 01:50:58 - __main__ - INFO - Запуск Data Integration Engine
+2026-04-13 01:50:58 - __main__ - INFO - Начинаем обработку 2 файлов в data
+2026-04-13 01:50:58 - __main__ - INFO - Обработка файла: transactions_1.csv
+2026-04-13 01:50:58 - __main__ - WARNING - Файл transactions_1.csv обработан с 1 ошибками. Успешных записей: 4
+2026-04-13 01:50:58 - __main__ - INFO - Обработка файла: transactions_2.json
+2026-04-13 01:50:58 - __main__ - WARNING - Файл transactions_2.json обработан с 1 ошибками. Успешных записей: 2
+2026-04-13 01:50:58 - app.services.aggregator - INFO - Данные успешно экспортированы в result.json
+2026-04-13 01:50:58 - __main__ - INFO - Обработка завершена. Успешно:2, Ошибок: 0, Транзакций: 6
+2026-04-13 01:53:20 - __main__ - INFO - Запуск Data Integration Engine
+2026-04-13 01:53:20 - __main__ - INFO - Начинаем обработку 2 файлов в data
+2026-04-13 01:53:20 - __main__ - INFO - Обработка файла: transactions_1.csv
+2026-04-13 01:53:20 - __main__ - WARNING - Файл transactions_1.csv обработан с 1 ошибками. Успешных записей: 4
+2026-04-13 01:53:20 - __main__ - INFO - Обработка файла: transactions_2.json
+2026-04-13 01:53:20 - __main__ - WARNING - Файл transactions_2.json обработан с 1 ошибками. Успешных записей: 2
+2026-04-13 01:53:20 - app.services.aggregator - INFO - Данные успешно экспортированы в result.json
+2026-04-13 01:53:20 - __main__ - ERROR - Необработанная ошибка
+Traceback (most recent call last):
+  File "C:\Users\kakab\PycharmProjects\pythonProject8\main.py", line 244, in main
+    stats = process_directory(
+        data_dir=Path(args.data_dir),
+        output_path=Path(args.output),
+        strict_duplicates=True
+    )
+  File "C:\Users\kakab\PycharmProjects\pythonProject8\main.py", line 157, in process_directory
+    "file": err.file_name,
+            ^^^^^^^^^^^^^
+AttributeError: 'ValidationError' object has no attribute 'file_name'
+2026-04-13 01:54:04 - __main__ - INFO - Запуск Data Integration Engine
+2026-04-13 01:54:04 - __main__ - INFO - Начинаем обработку 2 файлов в data
+2026-04-13 01:54:04 - __main__ - INFO - Обработка файла: transactions_1.csv
+2026-04-13 01:54:04 - __main__ - WARNING - Файл transactions_1.csv обработан с 1 ошибками. Успешных записей: 4
+2026-04-13 01:54:04 - __main__ - INFO - Обработка файла: transactions_2.json
+2026-04-13 01:54:04 - __main__ - WARNING - Файл transactions_2.json обработан с 1 ошибками. Успешных записей: 2
+2026-04-13 01:54:04 - app.services.aggregator - INFO - Данные успешно экспортированы в result.json
+2026-04-13 01:54:04 - __main__ - INFO - Обработка завершена. Успешно:2, Ошибок: 0, Транзакций: 6
+2026-04-13 09:05:29 - __main__ - INFO - Запуск Data Integration Engine
+2026-04-13 09:05:29 - __main__ - INFO - Начинаем обработку 2 файлов в data
+2026-04-13 09:05:29 - __main__ - INFO - Обработка файла: transactions_1.csv
+2026-04-13 09:05:29 - __main__ - WARNING - Файл transactions_1.csv обработан с 1 ошибками. Успешных записей: 4
+2026-04-13 09:05:29 - __main__ - INFO - Обработка файла: transactions_2.json
+2026-04-13 09:05:29 - __main__ - WARNING - Файл transactions_2.json обработан с 1 ошибками. Успешных записей: 2
+2026-04-13 09:05:29 - app.services.aggregator - INFO - Данные успешно экспортированы в result.json
+2026-04-13 09:05:29 - __main__ - INFO - Обработка завершена. Успешно:2, Ошибок: 0, Транзакций: 6
+2026-04-13 09:29:28 - __main__ - INFO - Запуск Data Integration Engine
+2026-04-13 09:29:28 - __main__ - INFO - Начинаем обработку 2 файлов в data
+2026-04-13 09:29:28 - __main__ - INFO - Обработка файла: transactions_1.csv
+2026-04-13 09:29:28 - __main__ - WARNING - Файл transactions_1.csv обработан с 1 ошибками. Успешных записей: 4
+2026-04-13 09:29:28 - __main__ - INFO - Обработка файла: transactions_2.json
+2026-04-13 09:29:28 - __main__ - WARNING - Файл transactions_2.json обработан с 1 ошибками. Успешных записей: 2
+2026-04-13 09:29:28 - app.services.aggregator - INFO - Данные успешно экспортированы в result.json
+2026-04-13 09:29:28 - __main__ - INFO - Обработка завершена. Успешно:2, Ошибок: 0, Транзакций: 6
+2026-04-13 09:31:10 - __main__ - INFO - Запуск Data Integration Engine
+2026-04-13 09:31:10 - __main__ - INFO - Начинаем обработку 2 файлов в data
+2026-04-13 09:31:10 - __main__ - INFO - Обработка файла: transactions_1.csv
+2026-04-13 09:31:10 - __main__ - WARNING - Файл transactions_1.csv обработан с 1 ошибками. Успешных записей: 4
+2026-04-13 09:31:10 - __main__ - INFO - Обработка файла: transactions_2.json
+2026-04-13 09:31:10 - __main__ - WARNING - Файл transactions_2.json обработан с 1 ошибками. Успешных записей: 2
+2026-04-13 09:31:10 - app.services.aggregator - INFO - Данные успешно экспортированы в result.json
+2026-04-13 09:31:10 - __main__ - INFO - Обработка завершена. Успешно:2, Ошибок: 0, Транзакций: 6
+2026-04-13 09:40:48 - __main__ - INFO - Запуск Data Integration Engine
+2026-04-13 09:40:48 - __main__ - INFO - Начинаем обработку 2 файлов в data
+2026-04-13 09:40:48 - __main__ - INFO - Обработка файла: transactions_1.csv
+2026-04-13 09:40:48 - __main__ - WARNING - Файл transactions_1.csv обработан с 1 ошибками. Успешных записей: 4
+2026-04-13 09:40:48 - __main__ - INFO - Обработка файла: transactions_2.json
+2026-04-13 09:40:48 - __main__ - WARNING - Файл transactions_2.json обработан с 1 ошибками. Успешных записей: 2
+2026-04-13 09:40:48 - app.services.aggregator - INFO - Данные успешно экспортированы в result.json
+2026-04-13 09:40:48 - __main__ - INFO - Обработка завершена. Успешно:2, Ошибок: 0, Транзакций: 6
+2026-04-15 16:15:45 - __main__ - INFO - Запуск Data Integration Engine
+2026-04-15 16:15:45 - __main__ - INFO - Начинаем обработку 2 файлов в data
+2026-04-15 16:15:45 - __main__ - INFO - Обработка файла: transactions_1.csv
+2026-04-15 16:15:45 - __main__ - WARNING - Файл transactions_1.csv обработан с 1 ошибками. Успешных записей: 4
+2026-04-15 16:15:45 - __main__ - INFO - Обработка файла: transactions_2.json
+2026-04-15 16:15:45 - __main__ - WARNING - Файл transactions_2.json обработан с 1 ошибками. Успешных записей: 2
+2026-04-15 16:15:45 - app.services.aggregator - INFO - Данные успешно экспортированы в result.json
+2026-04-15 16:15:45 - __main__ - INFO - Обработка завершена. Успешно:2, Ошибок: 0, Транзакций: 6
+2026-04-15 16:26:20 - __main__ - INFO - Запуск Data Integration Engine
+2026-04-15 16:26:20 - __main__ - INFO - Начинаем обработку 2 файлов в data
+2026-04-15 16:26:20 - __main__ - INFO - Обработка файла: transactions_1.csv
+2026-04-15 16:26:20 - __main__ - WARNING - Файл transactions_1.csv обработан с 1 ошибками. Успешных записей: 4
+2026-04-15 16:26:20 - __main__ - INFO - Обработка файла: transactions_2.json
+2026-04-15 16:26:20 - __main__ - WARNING - Файл transactions_2.json обработан с 1 ошибками. Успешных записей: 2
+2026-04-15 16:26:20 - app.services.aggregator - INFO - Данные успешно экспортированы в result.json
+2026-04-15 16:26:20 - __main__ - INFO - Обработка завершена. Успешно:2, Ошибок: 0, Транзакций: 6
