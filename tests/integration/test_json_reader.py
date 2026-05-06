@@ -3,10 +3,9 @@
 """
 
 import pytest
-import json
 
 from app.io.json_reader import JSONReader
-from app.core.exceptions import DataFormatError, EmptyFileError
+from app.core.exceptions import DataFormatError
 
 
 class TestJSONReader:
@@ -21,22 +20,21 @@ class TestJSONReader:
         assert records[0]['id'] == 'tx006'
 
     def test_json_wrong_format_no_transactions_key(self, tmp_path):
-        """Тест: JSON файл без ключа 'transactions' (но с данными)"""
+        """Тест: JSON файл без ключа 'transactions'"""
         bad_json = tmp_path / "bad.json"
         bad_json.write_text('{"wrong": "format"}', encoding='utf-8')
 
         reader = JSONReader(bad_json)
         records = list(reader.read_records())
 
-        # Одиночный объект должен быть обработан как одна транзакция?
-        # Если в твоем JSONReader это не поддерживается - проверяем что ошибка
-        # Сейчас records = [], значит тест должен ожидать ошибку или пустой список
-        assert len(records) == 0  # или ожидай DataFormatError
+        assert len(records) == 0
 
     def test_json_invalid_format(self, tmp_path):
         """Тест: невалидный JSON (синтаксическая ошибка)"""
         invalid_json = tmp_path / "invalid.json"
-        invalid_json.write_text('{"id": "1", "amount": 100', encoding='utf-8')
+        invalid_json.write_text(
+            '{"id": "1", "amount": 100', encoding='utf-8'
+        )
 
         with pytest.raises(DataFormatError):
             reader = JSONReader(invalid_json)
@@ -72,5 +70,4 @@ class TestJSONReader:
         reader = JSONReader(bad_data)
         records = list(reader.read_records())
 
-        # Записи без обязательных полей должны пропускаться
         assert len(records) == 0
