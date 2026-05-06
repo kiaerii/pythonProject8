@@ -1,0 +1,26 @@
+name: Run Tests
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Install dependencies
+      run: |
+        pip install pytest pytest-cov pytest-mock
+        pip install flake8
+
+    - name: Run flake8
+      run: flake8 app/ main.py --exclude=.venv --max-line-length=88
+
+    - name: Run tests with coverage
+      run: pytest tests/ -v --cov=app --cov-report=term

@@ -23,40 +23,35 @@ class ReaderRegistry:
     _readers: Dict[str, Type[BaseReader]] = {}
 
     @classmethod
-    def register(cls, reader_class: Type[BaseReader]) -> None:
-        """Регистрирует ридер для всех поддерживаемых расширений"""
-        # Регистрируем ридер для каждого поддерживаемого расширения
-        # Для простоты будем регистрировать по одному расширению на ридер
-        # В реальном проекте можно сделать более сложную логику
-        pass
+    def register(cls, extension: str, reader_class: Type[BaseReader]) -> None:
+        """Регистрирует ридер для определенного расширения"""
+        cls._readers[extension.lower()] = reader_class
 
     @classmethod
     def get_reader(cls, file_path: Path) -> Optional[BaseReader]:
         """
         Возвращает подходящий ридер для файла.
-        Использует метод supports_extension каждого зарегистрированного ридера.
         """
-        extension = file_path.suffix
+        extension = file_path.suffix.lower()
 
-        # Создаем список доступных ридеров
-        readers = [CSVReader, JSONReader]
+        reader_class = cls._readers.get(extension)
+        if reader_class:
+            try:
+                return reader_class(file_path)
+            except DataFormatError as e:
+                logger.error(f"Не удалось создать ридер для {file_path}: {e}")
+                raise
 
-        for reader_class in readers:
-            if reader_class.supports_extension(extension):
-                try:
-                    return reader_class(file_path)
-                except DataFormatError as e:
-                    logger.error(
-                        f"Не удалось создать ридер для {file_path}: {e}"
-                    )
-                    raise
-
-        logger.warning(
-            f"Неподдерживаемый формат файла: {extension}"
-        )
+        logger.warning(f"Неподдерживаемый формат файла: {extension}")
         return None
 
 
-# Автоматическая регистрация ридеров (можно расширять)
-ReaderRegistry.register(CSVReader)
-ReaderRegistry.register(JSONReader)
+# Регистрируем доступные ридеры
+ReaderRegistry.register('.csv', CSVReader)
+ReaderRegistry.register('.json', JSONReader)
+
+
+# Для обратной совместимости (если используется get_reader)
+def get_reader(file_path: Path) -> Optional[BaseReader]:
+    """Функция для получения ридера (обертка над Registry)"""
+    return ReaderRegistry.get_reader(file_path)

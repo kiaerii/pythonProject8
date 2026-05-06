@@ -1,12 +1,11 @@
-"""Кастомные исключения для приложения."""
+"""
+Кастомные исключения для приложения.
+"""
 
 
 class BaseAppError(Exception):
     """Базовое исключение для всего приложения."""
-
-    def __init__(self, message: str, original_error: Exception = None):
-        super().__init__(message)
-        self.original_error = original_error
+    pass
 
 
 class FatalError(BaseAppError):
@@ -33,7 +32,7 @@ class DuplicateIdError(ValidationError):
     """Ошибка дублирования идентификатора."""
     pass
 
+
 class EmptyFileError(DataFormatError):
     """Ошибка: файл пустой (0 байт)"""
     pass
-

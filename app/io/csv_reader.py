@@ -38,7 +38,8 @@ class CSVReader(BaseReader):
                     )
                     if missing_fields:
                         raise DataFormatError(
-                            f"Отсутствуют обязательные колонки: {missing_fields}"
+                            f"Отсутствуют обязательные колонки:"
+                            f" {missing_fields}"
                         )
 
                 for row_num, row in enumerate(reader, start=2):
