@@ -5,7 +5,14 @@
 
 class BaseAppError(Exception):
     """Базовое исключение для всего приложения."""
-    pass
+
+    def __init__(self, message: str, original_error: Exception = None):
+        self.message = message
+        self.original_error = original_error
+        if original_error:
+            super().__init__(f"{message}: {original_error}")
+        else:
+            super().__init__(message)
 
 
 class FatalError(BaseAppError):
