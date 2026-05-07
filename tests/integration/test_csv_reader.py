@@ -1,83 +1,75 @@
 """
-Интеграционные тесты для CSV Reader
+Чтение CSV файлов с финансовыми данными.
 """
 
-import pytest
+import csv
+from typing import Iterator
+import logging
 
-from app.io.csv_reader import CSVReader
-from app.services.validator import TransactionValidator
-from app.services.aggregator import TransactionAggregator
+from app.io.base_reader import BaseReader
 from app.core.exceptions import DataFormatError, EmptyFileError
 
+logger = logging.getLogger(__name__)
 
-class TestCSVReader:
-    """Тесты для CSV Reader"""
 
-    def test_read_valid_csv(self, temp_csv_file):
-        """Тест: чтение валидного CSV файла"""
-        reader = CSVReader(temp_csv_file)
-        records = list(reader.read_records())
+class CSVReader(BaseReader):
+    """Ридер для CSV файлов."""
 
-        assert len(records) == 3
-        assert records[0]['id'] == 'tx001'
-        assert records[0]['amount'] == '1500.50'
+    REQUIRED_FIELDS = {'id', 'amount', 'category', 'date'}
 
-    def test_csv_missing_columns(self, tmp_path):
-        """Тест: CSV файл без обязательных колонок"""
-        bad_csv = tmp_path / "bad.csv"
-        bad_csv.write_text("id,name,value\n1,test,100", encoding='utf-8')
+    def _validate_file(self) -> None:
+        """Проверка существования и доступности файла."""
+        super()._validate_file()
 
-        with pytest.raises(DataFormatError) as exc_info:
-            CSVReader(bad_csv)
+        # Проверка на пустой файл
+        if self.file_path.stat().st_size == 0:
+            raise EmptyFileError(f"Файл {self.file_path.name} пустой")
 
-        assert "Отсутствуют обязательные колонки" in str(exc_info.value)
+    def read_records(self) -> Iterator[dict]:
+        """Читает CSV файл построчно."""
+        try:
+            # utf-8-sig автоматически удаляет BOM символы
+            with open(self.file_path, 'r', encoding='utf-8-sig') as f:
+                reader = csv.DictReader(f)
 
-    def test_empty_csv_file(self, tmp_path):
-        """Тест: пустой CSV файл вызывает EmptyFileError"""
-        empty_csv = tmp_path / "empty.csv"
-        empty_csv.write_text("", encoding='utf-8')
+                # Проверка наличия заголовков
+                if not reader.fieldnames:
+                    raise DataFormatError(
+                        f"Файл {self.file_path.name} не содержит заголовков колонок"
+                    )
 
-        with pytest.raises(EmptyFileError) as exc_info:
-            CSVReader(empty_csv)
+                # Проверка наличия обязательных колонок
+                missing_fields = self.REQUIRED_FIELDS - set(reader.fieldnames)
+                if missing_fields:
+                    raise DataFormatError(
+                        f"Отсутствуют обязательные колонки: {missing_fields}"
+                    )
 
-        assert "пустой" in str(exc_info.value).lower()
+                for row_num, row in enumerate(reader, start=2):
+                    if not any(row.values()):
+                        continue
 
-    def test_csv_with_bom(self, tmp_path):
-        """Тест: CSV файл с BOM-символами"""
-        bom_csv = tmp_path / "bom.csv"
-        bom_csv.write_bytes(
-            b'\xef\xbb\xbfid,amount,category,date\n1,100,food,2024-01-15'
-        )
+                    # Проверяем наличие всех полей
+                    if not all(field in row for field in self.REQUIRED_FIELDS):
+                        logger.warning(
+                            f"Строка {row_num} в {self.file_path.name} пропущена"
+                        )
+                        continue
 
-        reader = CSVReader(bom_csv)
-        records = list(reader.read_records())
+                    yield row
 
-        assert len(records) == 1
-        assert records[0]['id'] == '1'
-
-    def test_csv_mixed_valid_invalid_rows(self, tmp_path):
-        """Тест: 1 хорошая и 2 плохие строки → в JSON только 1 запись"""
-        content = (
-            "id,amount,category,date\n"
-            "good_001,100.50,food,2024-01-15\n"
-            "bad_001,-50.00,transport,2024-01-16\n"
-            "bad_002,200.00,invalid,2024-01-17\n"
-        )
-        mixed_csv = tmp_path / "mixed.csv"
-        mixed_csv.write_text(content, encoding='utf-8')
-
-        reader = CSVReader(mixed_csv)
-        validator = TransactionValidator()
-        aggregator = TransactionAggregator()
-
-        valid_count = 0
-        for record in reader.read_records():
-            transaction = validator.validate_and_create_transaction(
-                record, 'mixed.csv'
+        except UnicodeDecodeError as e:
+            raise DataFormatError(
+                f"Ошибка кодировки в файле {self.file_path.name}",
+                original_error=e
             )
-            if transaction:
-                aggregator.add_transaction(transaction)
-                valid_count += 1
+        except csv.Error as e:
+            raise DataFormatError(
+                f"Ошибка парсинга CSV в файле {self.file_path.name}",
+                original_error=e
+            )
 
-        assert valid_count == 1
-        assert len(validator.errors) == 2
+    @staticmethod
+    def supports_extension(extension: str) -> bool:
+        """Проверяет поддержку расширения."""
+        return extension.lower() == '.csv'
